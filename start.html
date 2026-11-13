@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mechs WebKit | start</title>
+<style>
+  html,body{margin:0;min-height:100%;background:#08070f;color:#e8e6ff;
+    font:15px/1.45 Arial,Helvetica,sans-serif}
+  #wrap{max-width:980px;margin:0 auto;padding:34px 22px 60px}
+  h1{margin:0 0 6px;font-size:27px;letter-spacing:.09em;color:#b9ffea}
+  .sub{color:#9d97c8;margin:0 0 18px;font-size:13px}
+  .warn{border:1px solid #7a5c2a;background:#241c0d;color:#ffd99a;
+    border-radius:12px;padding:11px 13px;font-size:13px;margin:0 0 22px}
+  a.card{display:block;text-decoration:none;color:#fff;border:1px solid #4c4f96;
+    background:#161a37;border-radius:13px;padding:14px 16px;margin:0 0 11px}
+  a.card:hover{background:#20264d}
+  a.card b{color:#ffe4fc;font-size:16px}
+  a.card span{display:block;color:#a6a4cf;font-size:12.5px;margin-top:3px}
+  a.card.safe{border-color:#2f8f6c;background:#0d2a24}
+  a.card.safe:hover{background:#114034}
+  a.card.safe b{color:#a9ffd9}
+  a.plain{color:#8fd6ff;font-size:13px}
+</style>
+</head>
+<body>
+<div id="wrap">
+  <h1>MECHS WEBKIT &middot; START</h1>
+  <p class="sub">Pick one thing. Nothing runs until you tap it.</p>
+  <div class="warn">
+    One kernel run per boot. If the last attempt crashed, power the console
+    fully off (not Rest Mode), then come back to this page.
+  </div>
+
+  <a class="card" href="launch.html?v=1402s&amp;log=1&amp;afterglow=run&amp;mode=kpstep&amp;g=drain:16&amp;g=drainsz=0x4000&amp;kdiag=1&amp;payload=hen-1402.bin&amp;rawcopy=1">
+    <b>HEN 14.02 &mdash; ps4-hen rebuild (hen-1402.bin)</b>
+    <span>The 14.02 build: entry gate 4.74&ndash;14.02 and a 14.02 kernel branch table. Pre-flight checks both before the thread starts, then it installs HEN and starts FTP on 2121.</span>
+  </a>
+
+  <a class="card" href="launch.html?v=1402s&amp;log=1&amp;afterglow=run&amp;mode=kpstep&amp;g=drain:16&amp;g=drainsz=0x4000&amp;kdiag=1&amp;payload=binloader.bin&amp;rawcopy=1">
+    <b>BinLoader receiver (binloader.bin)</b>
+    <span>Firmware-independent payload receiver. Listens on TCP 9020, takes raw (E9) and ELF64 payloads, and re-listens after each one. Send hen.bin or hello.elf with netcat from the PC.</span>
+  </a>
+
+  <a class="card safe" href="launch.html?v=1402s&amp;log=1&amp;afterglow=run&amp;mode=kpstep&amp;g=drain:16&amp;g=drainsz:0x4000&amp;kdiag=1&amp;payload=none">
+    <b>Jailbreak only &mdash; no payload</b>
+    <span>uid 0 and the standalone Debug Settings patch (read back after the write). Stops cleanly before the payload loader, so it cannot crash.</span>
+  </a>
+
+  <a class="card" href="launch.html?v=1402s&amp;log=1&amp;afterglow=run&amp;mode=kpstep&amp;g=drain:16&amp;g=drainsz:0x4000&amp;kdiag=1&amp;payload=goldhen.bin&amp;rawcopy=1&amp;base=0x926200000">
+    <b>Bundled GoldHEN (goldhen.bin)</b>
+    <span>Installs GoldHEN's own 14.02 kernel payload (kpayload.elf), then starts the loader at 0x926200000. Refuses if the payload is not the 14.02 build or if 0x100000 is taken.</span>
+  </a>
+
+  <a class="card" href="launch.html?v=1402s&amp;log=1&amp;afterglow=run&amp;mode=kpstep&amp;g=drain:16&amp;g=drainsz:0x4000&amp;kdiag=1&amp;payload=hen.bin&amp;rawcopy=1">
+    <b>Bundled HEN (hen.bin)</b>
+    <span>Pack payload, no host byte patches.</span>
+  </a>
+
+  <a class="card" href="launch.html?v=1402s&amp;log=1&amp;afterglow=run&amp;mode=kpstep&amp;g=drain:16&amp;g=drainsz:0x4000&amp;kdiag=1&amp;payload=payload.bin&amp;rawcopy=1">
+    <b>Original payload (payload.bin)</b>
+    <span>Pack payload, no host byte patches.</span>
+  </a>
+
+  <a class="card" href="launch.html?v=1402s&amp;log=1&amp;afterglow=run&amp;mode=kpstep&amp;g=drain:16&amp;g=drainsz:0x4000&amp;kdiag=1&amp;payload=debug.bin&amp;rawcopy=1">
+    <b>Debug payload (debug.bin)</b>
+    <span>Pack payload, no host byte patches.</span>
+  </a>
+
+  <a class="card" href="launch.html?v=1402s&amp;log=1&amp;afterglow=run&amp;mode=kpstep&amp;g=drain:16&amp;g=drainsz:0x4000&amp;kdiag=1&amp;payload=goldhen-custom.bin&amp;rawcopy=1&amp;base=0x926200000">
+    <b>Custom GoldHEN (goldhen-custom.bin)</b>
+    <span>Your build, fixed base 0x926200000. Applies the verified 14.02 kernel patch set first and refuses to launch if it does not verify.</span>
+  </a>
+
+  <a class="card" href="launch.html?v=1402s&amp;log=1&amp;afterglow=run&amp;mode=kpstep&amp;g=drain:16&amp;g=drainsz:0x4000&amp;kdiag=1&amp;payload=hen-custom.bin&amp;rawcopy=1">
+    <b>Custom HEN (hen-custom.bin)</b>
+    <span>Your build, no fixed base (link address unknown).</span>
+  </a>
+
+  <p style="margin-top:20px"><a class="plain" href="index.html">Open the dashboard instead</a></p>
+</div>
+<script>
+  /* Carry the access key across the menu links. The server also sets a
+     session cookie, but a browser crash drops it; keeping the key in the URL
+     means a restored page still authenticates instead of showing 403. */
+  (function () {
+    var key = null;
+    try { key = new URLSearchParams(location.search).get("key"); } catch (e) {}
+    if (!key) return;
+    var links = document.querySelectorAll("a.card, a.plain");
+    for (var i = 0; i < links.length; i++) {
+      var href = links[i].getAttribute("href");
+      if (!href || href.indexOf("key=") >= 0) continue;
+      links[i].setAttribute("href", href + (href.indexOf("?") < 0 ? "?" : "&")
+        + "key=" + encodeURIComponent(key));
+    }
+  })();
+</script>
+</body>
+</html>

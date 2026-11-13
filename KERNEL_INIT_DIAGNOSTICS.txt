@@ -1,0 +1,5 @@
+Mechs WebKit 14.02: low-impact kernel-stage boundary diagnostics.
+Launch adds kdiag=1. Logs before Afterglow module import, after import, on return, or on exception.
+No changes inside afterglow-g.js, firmware offsets, payloads, or kernel memory operations.
+A freeze after import-complete without run-return does not identify which internal kernel operation stalled.
+Do not assume kernel success from HTTP 200 or thread rc=0.
